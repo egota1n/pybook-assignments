@@ -68,21 +68,37 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    A = phi
-    B = e
-    table = [[A, B, A%B, A//B]]
+
+    #
+    # CODE
+
+    #e = input()
+    #phi = input()
+
+    X = phi
+    Y = e
+
+    table = [[X, Y, X%Y, X//Y]]
     line = 0
-    while table[line][2] != 0:
-        A = table[line][1]
-        B = table[line][2]
-        table.append([A, B, A%B, A//B])
+
+    while (table[line][2] != 0):
+        X = table[line][1]
+        Y = table[line][2]
+        table.append([X, Y, X%Y, X//Y])
         line = line + 1
+
     table[line].append(0)
     table[line].append(1)
+
     for i in range(line-1, -1, -1):
-        table[i].append(table[i+1][5])
-        table[i].append(table[i+1][4] - table[i+1][5] * table[i][3])
+        table[i].append(table[i + 1][5])
+        table[i].append(table[i + 1][4] - table[i + 1][5] * table[i][3])
+
     return table[0][5] % phi
+
+    # THE END CODE
+    #
+
     pass
 
 
@@ -157,3 +173,8 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
+#is_prime()
+#generate_keypair()
+#gcd()
+#multiplicative_inverse()
