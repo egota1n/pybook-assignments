@@ -40,7 +40,24 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
+
+    #
+    # CODE
+
+    #a = input()
+    #b = input()
+
+    while (a != 0) and (b != 0):
+        if (a <= b):
+            b %= a
+        else:
+            a %= b
+    return a + b
+
+    #print(a + b)
+
+    # THE END CODE
+    #
     pass
 
 
@@ -51,7 +68,21 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
+    A = phi
+    B = e
+    table = [[A, B, A%B, A//B]]
+    line = 0
+    while table[line][2] != 0:
+        A = table[line][1]
+        B = table[line][2]
+        table.append([A, B, A%B, A//B])
+        line = line + 1
+    table[line].append(0)
+    table[line].append(1)
+    for i in range(line-1, -1, -1):
+        table[i].append(table[i+1][5])
+        table[i].append(table[i+1][4] - table[i+1][5] * table[i][3])
+    return table[0][5] % phi
     pass
 
 
@@ -61,11 +92,20 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
     elif p == q:
         raise ValueError("p and q cannot be equal")
 
+    #
+    # CODE
+
+    #p = input()
+    #g = input()
+
     # n = pq
-    # PUT YOUR CODE HERE
+    n = p * q
 
     # phi = (p-1)(q-1)
-    # PUT YOUR CODE HERE
+    phi = (p - 1) * (q - 1)
+
+    # THE END CODE
+    #
 
     # Choose an integer e such that e and phi(n) are coprime
     e = random.randrange(1, phi)
